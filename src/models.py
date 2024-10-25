@@ -20,7 +20,7 @@ class User(Base):
     password = Column(String(80), nullable=False)
     #relaciones
     #ATENCION: quise utilizar el backref de la clase, pero no se si lo he implementado bien
-    likes = relationship('Favourites', backref='likes')
+    likes = relationship('Favourites', backref='user')
 
 class Planets(Base):
     __tablename__ = 'planets'
@@ -33,7 +33,7 @@ class Planets(Base):
     descripcion = Column(String(250))
     #relaciones
 
-    likes = relationship('Favourites', back_populates='planets')
+    likes = relationship('Favourites', back_populates='planet')
 
 class Characters(Base):
     __tablename__ = 'characters'
@@ -46,7 +46,7 @@ class Characters(Base):
     color_pelo = Column(String(50))
     #relaciones
 
-    likes = relationship('Favourites', back_populates='characters')
+    likes = relationship('Favourites', back_populates='character')
 
 class Favourites(Base):
     __tablename__ = 'favourites'
@@ -57,8 +57,8 @@ class Favourites(Base):
     id_user = Column(Integer, ForeignKey('user.id'))
     #relaciones
 
-    planets = relationship('Planets', back_populates="likes")
-    characters = relationship('Characters', back_populates='likes')
+    planet = relationship('Planets', back_populates="likes")
+    character = relationship('Characters', back_populates='likes')
 
 
 
